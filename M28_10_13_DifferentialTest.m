@@ -1,0 +1,3 @@
+
+s=x^2+y^2+x*y
+t=differentiate(s,x)
