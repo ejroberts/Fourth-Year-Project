@@ -6,7 +6,7 @@ n=100;                         %Number of steps
 
 
     for k=2:1:n
-        potential(k)=potential(k-1)+(sqrt(dt))*(randn);   %Calculates potential 
+        potential(k)=potential(k-1)+(sqrt(dt))*(randn)+4;   %Calculates potential 
         t(k)=t(k-1)+dt;                                 %Time increment
     end
     
