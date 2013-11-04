@@ -2,15 +2,13 @@ t(1)=0;                      %Initial time
 dt=pi/50;
 potential(1)=rand;           %Initial random potential
 S(1)=rand;
-n=10;                         %Number of steps
+n=50;                         %Number of steps
 i=1;
-a=0.1;
-b=0.9;
 
     for k=2:1:n
         potential(k)=potential(k-1)+(sqrt(dt))*(randn);   %Calculates potential 
+        S(k)=S(1)*exp((a-0.5*(b^2))*t(k)+b*potential(k));
         t(k)=t(k-1)+dt;                                 %Time increment
-        S(k)=S(1)*exp((a-0.5*(b^2))*t(k)+b*potential(k)); 
     end
     
  M=0;
