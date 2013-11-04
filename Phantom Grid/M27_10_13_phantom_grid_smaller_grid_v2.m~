@@ -48,54 +48,37 @@ end
         sf=fit([position(:,1), position(:,2)], position(:,3), 'thinplateinterp');    %fits surface to potential
         plot(sf,[position(:,1), position(:,2)], position(:,3));
        
-if (particlex<=n-1 && particlex>=2)                                           %For particle within the grid
-    if(particley<=n-1 && particley>=2)
-        particlex=particlex
-        particley=particley
-        
-    elseif(particley>n-1)
-        particley=particley-(n-1)
-        particlex=particlex
-     
-    else
-        particley=particley+(n-1)
-        particlex=particlex
-    end
-
-
-elseif (particley<=n-1 && particley>=2) 
-     if(particlex<=n-1 && particlex>=2)
-        particlex=particlex
-        particley=particley
-        
-    elseif(particlex>n-1)
-        particlex=particlex-(n-1)
-        particley=particley
-     
-    else(particlex<2)
-        particlex=particlex+(n-1)
-        particley=particley
-     end
-elseif(particlex>(n-1))
-    if (particley>(n-1))
-        particlex=particlex-(n-1)
-        particley=particley-(n-1)
+if (particlex<=n)                                           %For particle within the grid
+    if(particley<=n)
+       
+    [gx, gy] = differentiate(sf, [particlex,particley])                     %Electric field calculated as derivative of potential at particle position
+     gx=-ex
+     gy=-ey
+     fx = q*ex                                                              %Force at particle position in x direction
+     fy = q*ey                                                              %Force at particle position in y direction
+     ax = fx/m                                                              %Acceleration of particle in x direction
+     ay = fy/m                                                              %Acceleration of particle in y direction 
+     particlex = particlex+ax*(pi/4)^2                                      %Particle position along the x axis
+     particley = particley+ay*(pi/4)^2                                      %Particle position along the y axis
     
-    elseif (particley<2)
-        particlex=particlex-(n-1)
-        particley=particley+(n-1)
-        
-    end
-elseif (particlex<2)
-    if (particley>(n-1))
-        particlex=particlex+(n-1)
-        particley=particley-(n-1)
+elseif (particlex>n-1 && 2<=particley<=n-1)                                    %Particle moves out of the grid in the positive x direction
+   1
+else 
+   0
+% 
+% elseif (particlex<=n-1 && particley>n-1)                                    %Particle moves out of the grid in the positive y direction
+%     partpot=interp2(A,particlex,particley-(n-1))
+% 
+% elseif (particlex<2 && particley<=n-1)                                    %Particle moves out of the grid in the positive x direction
+%     partpot=interp2(A,particlex-(n-1),particley)
+% 
+% elseif (particlex<=n-1 && particley>n-1)                                    %Particle moves out of the grid in the positive y direction
+%     partpot=interp2(A,particlex,particley-(n-1))
+% 
+% 
+% else
+%     
     
-    elseif (particley<2)
-        particlex=particlex+(n-1)
-        particley=particley+(n-1)
-        
-    end
 end
 
 
