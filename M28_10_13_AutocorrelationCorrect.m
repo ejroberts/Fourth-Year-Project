@@ -2,7 +2,7 @@ t(1)=0;                      %Initial time
 dt=pi/50;
 potential(1)=rand;           %Initial random potential
 S(1)=rand;
-n=10;                         %Number of steps
+n=1000;                         %Number of steps
 a=0.1;
 b=0.9;
 
@@ -15,44 +15,49 @@ b=0.9;
 
     
  
- for i=1:1:5
+ for i=1:1:500
  M=0;
  N=0; 
- a=zeros([1,n])
- b=zeros([1,n])
+ a=zeros([1,n]);
+ b=zeros([1,n]);
  
      for k=1:1:n-i
-         M=M+S(k)
+         M=M+S(k);
     end
  
-    Meana=M/(n-i)
+    Meana=M/(n-i);
     
     for k=1:1:n-i
-        a(k)=(S(k)-Meana)
+        a(k)=(S(k)-Meana);
     end
     
     
     for k=1+i:1:n
-        N=N+S(k)
+        N=N+S(k);
     end
     
-    Meanb=N/(n-i)
+    Meanb=N/(n-i);
     
     for k=1:1:n-i
-        b(k)=(S(k+i)-Meanb)
+        b(k)=(S(k+i)-Meanb);
     end
     
- A=sum(a.^2)
- B=sum(b.^2)
+ A=sum(a.^2);
+ B=sum(b.^2);
  
- den=sqrt(A*B)
+ den=sqrt(A*B);
 
-num=sum(a.*b)
+num=sum(a.*b);
  
- autocorrelation(i)=num/den
+ autocorrelation(i)=num/den;
+ 
+ g(i)=i;
  end
  
-
+plot(g,autocorrelation, '-rs')                             
+xlabel('Lag','FontSize', 10)
+ylabel('Autocorrelation','FontSize',10)
+grid on
 
  
 
