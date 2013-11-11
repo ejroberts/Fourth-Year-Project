@@ -1,7 +1,7 @@
 t(1)=0;                      %Initial time
 dt=pi/50;
 potential(1)=rand;           %Initial random potential
-n=100;                         %Number of steps
+n=10000;                         %Number of steps
 
 
 
@@ -18,7 +18,7 @@ n=100;                         %Number of steps
 
 den=sum(a);
     
-for i=1:1:50
+for i=1:1:5000
    
     for k=1:1:n-i
         b(k)=(potential(k)-M)*(potential(k+i)-M);
@@ -29,7 +29,7 @@ for i=1:1:50
  autocorrelation(i)=num(i)/den;                                    %Calculates the autocorrelation coefficient
 end
 
-% f=fit(g,autocorrelation,'exp1')
+%f=fit(g,autocorrelation,'exp1')
 plot(g,autocorrelation, '-rs')
                              
 xlabel('Lag','FontSize', 10)
