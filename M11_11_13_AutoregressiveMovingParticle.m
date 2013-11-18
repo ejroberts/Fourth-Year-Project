@@ -24,8 +24,8 @@ for a=1:1:n
     end
 end
 
-         a=randn
-         b=randn
+         a=randn;
+         b=randn;
 autocorrelation(1)=((1-theta*phi)*(phi-theta))/(1+(theta^2)-2*theta*phi);
 
 % B(1,1)=0
@@ -162,12 +162,12 @@ end
 % ylabel('y', 'FontSize', 10)
 % zlabel('Time', 'FontSize', 10)
 %    
-% f=fit(L(:), autocorrelation(:), 'exp1');
-% plot(L,autocorrelation, '-b')                             
-% hold on
-% plot(f)
-% xlabel('Lag','FontSize', 10)
-% ylabel('Autocorrelation','FontSize',10)
-% grid on
-% b=coeffvalues(f);
-% CorrT=(-1)/b(2) 
+f=fit(L(:), autocorrelation(:), 'exp1');
+plot(L,autocorrelation, '-b')                             
+hold on
+plot(f)
+xlabel('Lag','FontSize', 10)
+ylabel('Autocorrelation','FontSize',10)
+grid on
+b=coeffvalues(f);
+CorrT=(-1)/b(2) 
